@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book & Notes Vault - ALU Summative Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Skip to main content landmark link for keyboard accessibility (a11y) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="app-header">
+        <h1>Book & Notes Vault</h1>
+        <p>Organize academic resources, search contents, and track notes securely.</p>
+    </header>
+
+    <nav class="app-nav">
+        <ul>
+            <li><a href="#dashboard-section">Dashboard</a></li>
+            <li><a href="#vault-section">My Vault</a></li>
+            <li><a href="#form-section">Add Resource</a></li>
+            <li><a href="#settings-section">Vault Settings</a></li>
+            <li><a href="#scraping-section" class="stretch-tab">Scraping Sandbox</a></li>
+        </ul>
+    </nav>
+
+    <div class="layout-container">
+        
+        <main id="main-content" class="app-main">
+            
+            <!--  Stats Dashboard Overview with 7-Day Trend Container Block -->
+            <section id="dashboard-section" class="content-section" aria-labelledby="dash-title">
+                <h2 id="dash-title">Collection Dashboard Matrix</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Items</h3>
+                        <p id="stat-total">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Volume</h3>
+                        <p id="stat-sum-pages">0 pages</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Top Category/Tag</h3>
+                        <p id="stat-top-tag">None</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Cap Alert Warning</h3>
+                        <div id="cap-live-message" aria-live="assertive" class="live-alert">
+                            Status: Safe limits.
+                        </div>
+                    </div>
+                </div>
+
+                <!--  Trend visual Chart -->
+                <div class="chart-wrapper">
+                    <h3>Last 7 Days Resource Entry Trend</h3>
+                    <div id="trend-chart-bars" class="trend-chart-container"></div>
+                </div>
+            </section>
+
+            <!-- Searchable Table / Vault Cards Display Area -->
+            <section id="vault-section" class="content-section" aria-labelledby="vault-title">
+                <h2 id="vault-title">Your Resource Vault</h2>
+                
+                <div class="search-box">
+                    <label id="search-label" for="vault-search">Live Regex Filter Expression:</label>
+                    <input type="text" id="vault-search" placeholder="Type letters or regex patterns..." aria-labelledby="search-label">
+                    <span id="search-error" class="validation-error-msg" aria-live="polite"></span>
+                </div>
+
+                <div class="sort-controls">
+                    <span>Sort items by:</span>
+                    <button type="button" id="sort-title-btn" class="sort-btn">Title (A-Z)</button>
+                    <button type="button" id="sort-pages-btn" class="sort-btn">Pages (Low-High)</button>
+                    <button type="button" id="sort-date-btn" class="sort-btn">Date Added</button>
+                </div>
+
+                <div id="vault-items-container" class="items-list-container"></div>
+            </section>
+
+            <!-- Input Configuration Form -->
+            <section id="form-section" class="content-section" aria-labelledby="form-title">
+                <h2 id="form-title">Resource Entry Management Workspace</h2>
+                <form id="resource-form" onsubmit="event.preventDefault();" novalidate>
+                    <input type="hidden" id="edit-record-id" value="">
+                    
+                    <div class="form-group">
+                        <label for="input-title">Title / Description:</label>
+                        <input type="text" id="input-title" required placeholder="e.g., ALU Software Engineering Basics">
+                        <span class="field-hint">Rules: Minimum 4 characters, no consecutive whitespaces.</span>
+                        <span id="err-title" class="validation-error-msg" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-pages">Number of Pages / Length:</label>
+                        <input type="number" id="input-pages" required placeholder="e.g., 145">
+                        <span class="field-hint">Rules: Positive integer values strictly between 1 and 9999.</span>
+                        <span id="err-pages" class="validation-error-msg" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-date">Date Created (YYYY-MM-DD):</label>
+                        <input type="text" id="input-date" required placeholder="YYYY-MM-DD">
+                        <span class="field-hint">Rules: Valid historic YYYY-MM-DD date format.</span>
+                        <span id="err-date" class="validation-error-msg" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-tags">Classification Tag / Category:</label>
+                        <input type="text" id="input-tags" required placeholder="e.g., tech, notes">
+                        <span class="field-hint">Rules: Lowercase characters separated by a slash.</span>
+                        <span id="err-tags" class="validation-error-msg" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-advanced">Advanced Pattern Matching Field:</label>
+                        <input type="text" id="input-advanced" required placeholder="e.g., Repeat repeat word">
+                        <span class="field-hint">Rules: Must contain duplicate duplicate tracking words consecutively.</span>
+                        <span id="err-advanced" class="validation-error-msg" aria-live="polite"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-limit">Set Virtual Storage Warning Target (Cap):</label>
+                        <input type="number" id="input-limit" value="5" min="1">
+                    </div>
+
+                    <button type="submit" id="submit-form-btn" class="submit-btn">Save Resource Entry to Vault</button>
+                    <button type="button" id="cancel-edit-btn" class="action-btn" style="display: none; margin-top: 5px; width: 100%;">Cancel Edit Mode</button>
+                </form>
+            </section>
+
+            <!--  Units Conversion Engine Settings -->
+            <section id="settings-section" class="content-section" aria-labelledby="settings-title">
+                <h2 id="settings-title">Vault Metrics & Unit Converter Settings</h2>
+                <p>Convert resource lengths natively between alternative scale vectors (Pages &harr; Chapters).</p>
+                <div class="converter-box">
+                    <div class="form-group">
+                        <label for="convert-input">Enter Scale Magnitude Value:</label>
+                        <input type="number" id="convert-input" value="10" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="convert-mode">Select Conversion Ratio Path:</label>
+                        <select id="convert-mode">
+                            <option value="pages-to-chapters">Pages to Chapters (Assumes 20 pages/chapter)</option>
+                            <option value="chapters-to-pages">Chapters to Pages (Assumes 20 pages/chapter)</option>
+                        </select>
+                    </div>
+                    <p><strong>Calculated Output Result:</strong> <span id="conversion-result-display">0.50 Chapters</span></p>
+                </div>
+            </section>
+
+            <!-- Data Portability and Exchange Operations -->
+            <section id="data-section" class="content-section" aria-labelledby="data-title">
+                <h2 id="data-title">Data Backup Portability</h2>
+                <div class="backup-actions">
+                    <button type="button" id="export-json-btn" class="action-btn">Export Current Database JSON</button>
+                    <div class="import-group">
+                        <label for="import-json-area" class="visually-hidden">Paste database JSON records:</label>
+                        <textarea id="import-json-area" placeholder="Paste data array configuration strings here accurately..."></textarea>
+                        <button type="button" id="import-json-btn" class="action-btn src-load-btn">Import Verified Database</button>
+                    </div>
+                    <span id="import-error" class="validation-error-msg" aria-live="polite"></span>
+                </div>
+            </section>
+
+            <section id="scraping-section" class="content-section" aria-labelledby="scraping-title">
+                <h2 id="scraping-title">Mini Content Scraping Sandbox</h2>
+                <div class="scraping-box">
+                    <textarea id="scrape-html-input" rows="4" placeholder="Paste structural raw HTML code snippets here..."></textarea>
+                    <button type="button" id="scrape-execute-btn" class="action-btn">Parse Content Snippets</button>
+
+
+                    <div class="scrape-results-wrapper">
+                        <h4>Scraped Results:</h4>
+                        <div id="scrape-output-display" class="empty-placeholder">No data elements evaluted yet.</div>
+                    </div>
+                    
+                </div>
+            </section>
+
+        </main>
+        <!-- Aside Section for additional information or links -->
+         <aside class="app-sidebar" aria-label="Author Profile Information">
+            <div class="profile-card">
+                <h3>Student Vault Profile</h3>
+                <p><strong>Name:</strong>Joshua Gasasira</p>
+                <p><strong>Institution:</strong>African Leadership University</p>
+                <p><strong>Contact:</strong> jgasasira@alustudent.com</p>
+            </div>
+            <div class="guidelines-card">
+                <h3>Vault Integrity Checks</h3>
+                <ul>
+                    <li>Auto-saves systematically to local client profiles.</li>
+                    <li>Strict testing rules applied directly.</li>
+                    <li>Tab focus indicators strictly maintained for all fields.</li>
+                </ul>
+            </div>
+         </aside>
+    </div>
+    <footer class="app-footer">
+        <p>&copy; 2026 Student Developer Portfolio Project. All rights reserved.</p>
+    </footer>
+    <script src="app.js"></script>
+    </body>
+</html>

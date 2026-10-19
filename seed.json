@@ -1,0 +1,102 @@
+[
+  {
+    "id": "rec_0001",
+    "title": "ALU Leadership Core Values Note",
+    "pages": 12,
+    "date": "2026-10-10",
+    "tags": "education/leadership",
+    "advanced": "The primary pattern requires double double words.",
+    "createdAt": "2026-10-18T20:00:00.000Z",
+    "updatedAt": "2026-10-18T20:00:00.000Z"
+  },
+  {
+    "id": "rec_0002",
+    "title": "Responsive Flexbox Cheatsheet Booklet",
+    "pages": 4,
+    "date": "2026-10-12",
+    "tags": "tech/css",
+    "advanced": "Ensure you check check background colors systematically.",
+    "createdAt": "2026-10-18T21:10:00.000Z",
+    "updatedAt": "2026-10-18T21:10:00.000Z"
+  },
+  {
+    "id": "rec_0003",
+    "title": "Introduction to Network Systems Basics",
+    "pages": 245,
+    "date": "2026-10-14",
+    "tags": "tech/networking",
+    "advanced": "Review these review details.",
+    "createdAt": "2026-10-18T21:15:00.000Z",
+    "updatedAt": "2026-10-18T21:15:00.000Z"
+  },
+  {
+    "id": "rec_0004",
+    "title": "Academic Research Writing Guidelines Portfolio",
+    "pages": 18,
+    "date": "2026-10-15",
+    "tags": "education/writing",
+    "advanced": "Focus focus on thesis structures.",
+    "createdAt": "2026-10-18T21:20:00.000Z",
+    "updatedAt": "2026-10-18T21:20:00.000Z"
+  },
+  {
+    "id": "rec_0005",
+    "title": "Vanilla JavaScript DOM Manipulation Guide",
+    "pages": 89,
+    "date": "2026-10-16",
+    "tags": "tech/javascript",
+    "advanced": "Match match event structures.",
+    "createdAt": "2026-10-18T21:25:00.000Z",
+    "updatedAt": "2026-10-18T21:25:00.000Z"
+  },
+  {
+    "id": "rec_0006",
+    "title": "ALU Entrepreneurship Capstone Handbook",
+    "pages": 310,
+    "date": "2026-10-17",
+    "tags": "business/ethics",
+    "advanced": "Analyze analyze corporate models.",
+    "createdAt": "2026-10-18T21:30:00.000Z",
+    "updatedAt": "2026-10-18T21:30:00.000Z"
+  },
+  {
+    "id": "rec_0007",
+    "title": "Semantic HTML Layout Best Practices",
+    "pages": 15,
+    "date": "2026-10-17",
+    "tags": "tech/html",
+    "advanced": "Verify verify markup tags.",
+    "createdAt": "2026-10-18T21:35:00.000Z",
+    "updatedAt": "2026-10-18T21:35:00.000Z"
+  },
+  {
+    "id": "rec_0008",
+    "title": "Data Structures Algorithms Notebook",
+    "pages": 412,
+    "date": "2026-10-18",
+    "tags": "tech/algorithms",
+    "advanced": "Sort sort array lists.",
+    "createdAt": "2026-10-18T21:40:00.000Z",
+    "updatedAt": "2026-10-18T21:40:00.000Z"
+  },
+  {
+    "id": "rec_0009",
+    "title": "Global Economics Macro Trends Report",
+    "pages": 56,
+    "date": "2026-10-18",
+    "tags": "business/finance",
+    "advanced": "Track track inflation spikes.",
+    "createdAt": "2026-10-18T21:45:00.000Z",
+    "updatedAt": "2026-10-18T21:45:00.000Z"
+  },
+  {
+    "id": "rec_0010",
+    "title": "Web Accessibility Design Patterns Review",
+    "pages": 32,
+    "date": "2026-10-18",
+    "tags": "tech/accessibility",
+    "advanced": "Test test focus rings.",
+    "createdAt": "2026-10-18T21:50:00.000Z",
+    "updatedAt": "2026-10-18T21:50:00.000Z"
+  }
+]

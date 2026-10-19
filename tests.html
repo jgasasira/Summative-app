@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Automation Validation Engine Unit Tests </title>
+        <style>
+            body { font-family: system-ui, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+            .test-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0,1); margin-bottom: 15px; }
+            .pass { color: #16a34a; font-weight: bold; }
+            .fail { color: #dc2626; font-weight:bold;}
+            h1 { color: #0f172a;}
+            hr { border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+            .summary-header{ background: #dcfce7; color: #15803d; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-weight: bold; }
+
+        </style>
+    </head>
+    <body>
+        <h1>ALU Regex Core Tests</h1>
+        <p>This file executes assertion tests against project validation constraints.</p>
+        <hr>
+        <div id="test-summary"></div>
+        <div id="test-results-container"></div>
+
+        <script>
+             // Copy of regular expression engines strictly matching app.js specs
+            const REGEX_RULES = {
+            title: /^[^\s](?!.*?\s{2,}).*[^\s]$/,
+            pages: /^[1-9]\d{0,3}$/,
+            date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|\d|3)$/,
+            tags: /^[a-z]+(?:\/[a-z]+)*$/,
+            advanced: /\b([A-Za-z]+)\s+\1\b/
+            };
+
+            const testSuites = [
+            // Rule 1: Title Tests
+            { name: "Title Validation - Standard text match", regex: REGEX_RULES.title, input: "ALU Software Notes", expect: true },
+            { name: "Title Validation - Catch leading whitespace", regex: REGEX_RULES.title, input: "  Invalid Title", expect: false },
+            { name: "Title Validation - Catch consecutive double spaces", regex: REGEX_RULES.title, input: "Title  Double  Space", expect: false },
+
+            // Rule 2: Pages Tests
+            { name: "Pages Validation - Valid baseline bound", regex: REGEX_RULES.pages, input: "145", expect: true },
+            { name: "Pages Validation - Catch zero upper out-of-bounds", regex: REGEX_RULES.pages, input: "0", expect: false },
+            { name: "Pages Validation - Catch scale overflows (>9999)", regex: REGEX_RULES.pages, input: "12500", expect: false },
+
+            // Rule 3: Date Tests
+            { name: "Date Validation - Valid standard syntax string", regex: REGEX_RULES.date, input: "2026-10-18", expect: true },
+            { name: "Date Validation - Catch slash separator error typos", regex: REGEX_RULES.date, input: "2026/10/18", expect: false },
+
+            // Rule 4: Tag Classification Tests
+            { name: "Tags Validation - Slash delimited tokens match", regex: REGEX_RULES.tags, input: "tech/javascript", expect: true },
+            { name: "Tags Validation - Catch accidental uppercase formatting", regex: REGEX_RULES.tags, input: "Tech/Css", expect: false },
+
+            // Rule 5: Advanced Backreference Sequence Tests
+            { name: "Advanced Regex - Valid consecutive repeated text values", regex: REGEX_RULES.advanced, input: "double double tokens match", expect: true },
+            { name: "Advanced Regex - Catch standard isolated unique arrays", regex: REGEX_RULES.advanced, input: "single standard sequence layout", expect: false }
+            ];
+            const container = document.getElementById("test-results-container");
+            let passedTotal = 0;
+
+             testSuites.forEach((test,index) => {
+            const isMatch = test.regex.test(test.input);
+            const statusPasses = isMatch === test.expect;
+            if (statusPasses) passedTotal++;
+
+            const testCard = document.createElement("div");
+            testCard.className = "test-card";
+            testCard.innerHTML = 
+            "<strong>Assertion #" + (index + 1) + ":" + test.name + "</strong><br>" +
+            "Input Tested: <code>\"" + test.input + "\"</code> | " +
+            "Result: <span class=\"" + (statusPasses ? "pass" : "fail") + "\">" + (statusPasses ? "PASSED" : "FAILED") + "</span>";
+            ;
+            container.appendChild(testCard);
+            });
+
+            const summaryDisplay = document.getElementById("test-summary");
+            summaryDisplay.className = "summary-header";
+            summaryDisplay.innerHTML = "Test Suite Execution Run Completed:" + passedTotal + " / " + testSuites.length + "Assertions Succeeded.";
+        </script>
+    </body>
+</html>

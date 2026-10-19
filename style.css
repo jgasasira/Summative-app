@@ -1,0 +1,421 @@
+:root {
+    --bg-primary: #f5f7fa;
+    --bg-surface: #ffffff;
+    --text-main: #1a202c;
+    --text-muted: #4a5568;
+    --color-accent: #0066cc;
+    --color-success: #2f855a;
+    --color-danger: #cbd5e0;
+    --color-border: #cbd5e0;
+    --focus-ring: #4299e1;
+    --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 10px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    background: var(--color-accent);
+    color: white;
+    padding: 10px;
+    z-index: 100;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
+a:focus, button:focus, input:focus, textarea:focus {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.app-header {
+    background-color: var(--bg-surface);
+    padding: 20px;
+    border-radius: 8px;
+    border-bottom: 4px solid var(--color-accent);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    margin-bottom: 5px;
+}
+
+.app-nav {
+    background-color: var(--bg-surface);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.app-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.app-nav a {
+    display: inline-block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.app-nav a:hover {
+    background-color: var(--bg-primary);
+    color: var(--color-accent);
+}
+
+.stretch-tab {
+    background-color: #f7fafc;
+    border: 1px dashed var(--color-border) !important;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content-section {
+    background: var(--bg-surface);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 15px;
+}
+
+.content-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--bg-primary);
+    padding-bottom: 5px;
+    color: var(--color-accent);
+}
+
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-card {
+    background: var(--bg-primary);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 5px solid var(--color-accent);
+}
+
+.live-alert {
+    font-weight: bold;
+    color: var(--color-success);
+}
+
+.live-alert.alert-triggered {
+    color: #c53030;
+    animation: simplePulse 1.5s infinite;
+}
+
+.search-box {
+    margin-bottom: 15px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Dashboard Trend Chart Styles */
+.chart-wrapper {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid var(--bg-primary);
+}
+
+.chart-wrapper h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+}
+
+.trend-chart-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 120px;
+    padding: 10px 5px;
+    background: #f8fafc;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    gap: 8px;
+}
+
+.chart-bar-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.chart-bar-fill {
+    width: 100%;
+    background-color: var(--color-accent);
+    border-radius: 3px 3px 0 0;
+    min-height: 4px;
+    transition: height 0.5s ease-in-out;
+}
+
+.chart-bar-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+.sort-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sort-btn {
+    background: var(--bg-primary);
+    border: 1px solid var(--color-border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.sort-btn:hover {
+    background: var(--color-border);
+}
+
+.vault-article {
+    background: #f8fafc;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.vault-article h3 {
+    margin-bottom: 8px;
+}
+
+.vault-article mark {
+    background-color: #fef08a;
+    color: #854d0e;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.vault-article.editing-active-state {
+    border: 2px solid var(--focus-ring);
+    background: #f0f7ff;
+}
+
+.edit-item-btn {
+    position: absolute;
+    top: 15px;
+    right: 85px;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-item-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c53030;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+/* Converter Box Formatting */
+.converter-box {
+    background: #f8fafc;
+    padding: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+#conversion-result-display {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+.field-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.validation-error-msg {
+    display: block;
+    font-size: 0.85rem;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.submit-btn {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #004499;
+}
+
+.backup-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-btn {
+    background: var(--bg-primary);
+    border: 1px solid var(--color-border);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.import-group textarea {
+    width: 100%;
+    height: 60px;
+    margin: 5px 0;
+}
+
+.app-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-card, .guidelines-card {
+    background: var(--bg-surface);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.guidelines-card ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.app-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0; 
+}
+
+@keyframes simplePulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@media (min-width: 768px) {
+    body { padding: 20px; }
+    .app-header h1 { font-size: 2.2rem; }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .layout-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    .app-main { flex: 3; }
+    .app-sidebar { flex: 1; position: sticky; top: 20px; }
+}
